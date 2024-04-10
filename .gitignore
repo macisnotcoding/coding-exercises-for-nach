@@ -1,0 +1,39 @@
+## Ignorar la carpeta de configuración de Visual Studio
+.vs/
+
+## Ignorar los directorios de compilación
+bin/
+obj/
+
+## Ignorar archivos de configuración específicos del usuario de Visual Studio
+*.user
+*.userosscache
+*.suo
+
+## Ignorar archivos de compilación
+*.dll
+*.exe
+*.pdb
+
+## Ignorar los archivos de paquetes NuGet descargados
+packages/
+## No ignores el archivo de configuración repositories.config
+!packages/*.config
+
+## Ignorar archivos temporales que pueden ser creados por Visual Studio
+*.cache
+*.bak
+*.[Cc]ache
+*.[Bb]ak
+*.[Tt]mp
+*.log
+*.vspscc
+*.vssscc
+*.userprefs
+
+## Carpetas adicionales y archivos que podrían aparecer en el directorio raíz
+.DS_Store
+Thumbs.db
+
+# Archivos de proyecto de Visual Studio Code (si lo usas)
+.vscode/
