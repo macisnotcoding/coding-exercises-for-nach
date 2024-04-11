@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RetosMoureDev.Models.Poligonos;
 
 namespace RetosMoureDev
 {
@@ -93,6 +89,100 @@ namespace RetosMoureDev
 
             return true;
         }
+        #endregion
+
+        #region Ejercicio 3
+
+        /// <summary>
+        /// Escribe un programa que imprima los 50 primeros números de la sucesión
+        /// de Fibonacci empezando en 0.
+        /// - La serie Fibonacci se compone por una sucesión de números en
+        ///   la que el siguiente siempre es la suma de los dos anteriores.
+        ///   0, 1, 1, 2, 3, 5, 8, 13...
+        /// </summary>
+        public static void N3()
+        {
+            //Usamos long en vez de int porque los numeros de la sucesión de Fibonacci pueden ser muy grandes y no cabrían en un int
+            long n1 = 0;
+            long n2 = 1;
+
+            Console.WriteLine("Los 50 primeros números de la sucesión de Fibonacci son: ");
+            Console.WriteLine("1: {0}", n1);
+            Console.WriteLine("2: {0}", n2);
+
+            //Empezamos en 2 porque ya hemos impreso los dos primeros numeros
+            for (int i = 2; i < 50; i++)
+            {
+                //Calculamos el siguiente numero de la sucesion
+                long n3 = n1 + n2;
+                Console.WriteLine("{0}: {1}", i + 1, n3);
+
+                //Actualizamos los valores para la siguiente iteracion
+                n1 = n2;
+                n2 = n3;
+            }
+        }
+
+
+        #endregion
+
+        #region Ejercicio 4
+
+        /// <summary>
+        /// Escribe un programa que se encargue de comprobar si un número es o no primo.
+        /// Hecho esto, imprime los números primos entre 1 y 100.
+        /// </summary>
+        public static void N4()
+        {
+            Console.WriteLine("Los números primos entre 1 y 100 son: ");
+
+            for(int i = 1; i <= 100; i++)
+            {
+                if(EsPrimo(i))
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
+
+        private static bool EsPrimo(int num)
+        {
+            // Los números menores o iguales a 1 no son primos
+            if (num <= 1)
+            {
+                return false;
+            }
+
+            // Comprobamos si el número es divisible por algún número menor que él
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0)
+                {
+                    // Si es divisible, no es primo
+                    return false;
+                }
+            }
+
+            // Si no es divisible por ningún número menor que él, es primo
+            return true;
+        }
+
+        #endregion
+
+        #region Ejercicio 5
+
+        /// <summary>
+        /// Crea una única función (importante que sólo sea una) que sea capaz
+        /// de calcular y retornar el área de un polígono.
+        /// - La función recibirá por parámetro sólo UN polígono a la vez.
+        /// - Los polígonos soportados serán Triángulo, Cuadrado y Rectángulo.
+        /// - Imprime el cálculo del área de un polígono de cada tipo.
+        /// </summary>
+        public static void N5(Poligono poligono)
+        {
+            Console.WriteLine("El área del poligono es {0}", poligono.CalcularArea());
+        }
+
         #endregion
     }
 }
