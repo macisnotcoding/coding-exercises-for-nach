@@ -236,11 +236,14 @@ namespace RetosMoureDev
 
         private static async Task<string> GetImageAspectRatio(string urlImagen)
         {
+            //Usamos HttpClient para descargar la imagen y poder obtener su ancho y alto
             using (var client = new HttpClient())
             {
+                //Descargamos la imagen
                 var response = await client.GetAsync(urlImagen);
                 response.EnsureSuccessStatusCode();
 
+                //Leemos la imagen como un stream
                 using(var stream = await response.Content.ReadAsStreamAsync())
                 {
                     #region Windows only
@@ -250,6 +253,7 @@ namespace RetosMoureDev
 
                     //Ahora que tenemos el ancho y alto de la imagen (1920x1080px por ejemplo) calculamos el maximo comun divisor (MCD) de ambos
                     //y dividimos cada proporcion por este para sacar el ratio
+                    //Por ejemplo, si el MCD de 1920 y 1080 es 120, el aspect ratio de la imagen es 16:9
                     int mcd = MCD(ancho, alto);
 
                     return $"{ancho/mcd}:{alto/mcd}";
@@ -273,6 +277,7 @@ namespace RetosMoureDev
             }
         }
 
+        //Calcula el maximo comun divisor de dos numeros
         private static int MCD(int a, int b)
         {
             while (b != 0)
@@ -306,6 +311,7 @@ namespace RetosMoureDev
         {
             char[] palabraInvertida = new char[palabraAInvertir.Length];
 
+            //Recorremos la palabra original de atras hacia adelante y la guardamos en la palabra invertida
             for(int i = 0;  i < palabraInvertida.Length; i++)
             {
                 palabraInvertida[i] = palabraAInvertir[palabraAInvertir.Length - (i + 1)];
@@ -342,6 +348,7 @@ namespace RetosMoureDev
             }
         }
 
+        //Normaliza la oracion quitando signos de puntuacion, espacios al principio/final y poniendo todo en minusculas
         private static string NormalizarOracion(string oracion) 
         {
             string oracionNormalizada = string.Empty;
@@ -362,8 +369,13 @@ namespace RetosMoureDev
         private static Dictionary<string, int> ObtenerPalabrasConOcurrencias(string oracion)
         {
             string[] palabasDeOracion = oracion.Split(' ');
+            //Usamos un diccionario para guardar las palabras y cuantas veces aparecen
+            //La clave es la palabra y el valor es el numero de veces que aparece
+            //Por ejemplo, si la oracion es "hola hola mundo", el diccionario seria {"hola": 2, "mundo": 1}
+            //La alternativa que viste en clase seria usar dos arrays, uno para las palabras y otro para las ocurrencias, pero es menos eficiente y sujeto a errores
             Dictionary<string, int> palabrasConOcurrencias = new Dictionary<string, int>();
 
+            //Recorremos cada palabra de la oracion y contamos cuantas veces aparece
             foreach(string palabra in palabasDeOracion)
             {
                 if(palabrasConOcurrencias.ContainsKey(palabra))
@@ -416,9 +428,16 @@ namespace RetosMoureDev
 
         private static string ObtenerBinario(uint numero)
         {
+            //Si el numero es 0, su representacion en binario es 0
             if (numero == 0)
                 return "0";
 
+            //Usamos un string para guardar el numero binario
+            //Empezamos con un string vacio y vamos añadiendo los restos de la division del numero entre 2
+            //Esto se hace de atras hacia adelante, por lo que al final invertimos el string para tener el numero binario correcto
+            //Por ejemplo, si el numero es 4, el bucle se ejecutaria 3 veces (4/2 = 2 resto 0, 2/2 = 1 resto 0, 1/2 = 0 resto 1)
+            //Y el string seria "001"
+            //Al invertirlo, obtenemos el numero binario correcto "100"
             string binario = string.Empty;
             while(numero > 0)
             {
@@ -494,8 +513,16 @@ namespace RetosMoureDev
                 {'/', "-..-."}, {'\\', ".—..—."}
             };
 
+            //Recorremos cada letra del mensaje y la codificamos
+            //Importante convertir el mensaje a mayusculas para que las letras coincidan con las del diccionario
             foreach (char letra in mensaje.ToUpper())
             {
+                //Si la letra esta en el diccionario, la codificamos
+                //Si no, la dejamos tal cual (para espacios y puntuaciones)
+                //Tambien añadimos un espacio entre cada letra
+                //Por ejemplo, si el mensaje es "HELLO WORLD"
+                //El mensaje codificado seria ".... . .-.. .-.. ---  .-- --- .-. .-.. -.."
+                //Donde cada letra esta separada por un espacio y cada palabra por dos
                 if(diccionarioNaturalMorse.ContainsKey(letra))
                 {
                     mensajeCodificado.Append(diccionarioNaturalMorse[letra]);
@@ -532,6 +559,13 @@ namespace RetosMoureDev
 
             };
 
+            //Recordemos que en morse, las letras se separan por un espacio y las palabras por dos
+            //Por lo que primero separamos las palabras y luego las letras
+            //Por ejemplo, si el mensaje es ".... . .-.. .-.. ---  .-- --- .-. .-.. -.."
+            //Primero separamos las palabras y obtenemos ".... . .-.. .-.. ---" y ".-- --- .-. .-.. -.."
+            //Luego separamos las letras y obtenemos "....", ".", ".-..", ".-..", "---" y ".--", "---", ".-.", ".-..", "-.."
+            //Y finalmente descodificamos cada letra y juntamos las palabras
+            //Por lo que el mensaje descodificado seria "HELLO WORLD"
             foreach(string palabra in mensaje.ToUpper().Split("  "))
             {
                 foreach(string simbolos in palabra.Split(" "))
@@ -542,7 +576,6 @@ namespace RetosMoureDev
                     }
                     else
                     {
-                        //Util para meter espacios y puntuaciones
                         mensajeDescodificado.Append(simbolos);
                     }
 
