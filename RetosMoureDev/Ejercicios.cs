@@ -1,6 +1,7 @@
 ﻿using RetosMoureDev.Models.Poligonos;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace RetosMoureDev
 {
@@ -25,17 +26,17 @@ namespace RetosMoureDev
             {
                 string output = string.Empty;
 
-                if(i % 3 == 0)
+                if (i % 3 == 0)
                 {
                     output += "fizz";
                 }
-                
-                if(i % 5 == 0)
+
+                if (i % 5 == 0)
                 {
                     output += "buzz";
                 }
 
-                if(string.IsNullOrWhiteSpace(output)) 
+                if (string.IsNullOrWhiteSpace(output))
                 {
                     output = i.ToString();
                 }
@@ -154,9 +155,9 @@ namespace RetosMoureDev
         {
             Console.WriteLine("Los números primos entre 1 y 100 son: ");
 
-            for(int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 100; i++)
             {
-                if(EsPrimo(i))
+                if (EsPrimo(i))
                 {
                     Console.WriteLine(i);
                 }
@@ -244,7 +245,7 @@ namespace RetosMoureDev
                 response.EnsureSuccessStatusCode();
 
                 //Leemos la imagen como un stream
-                using(var stream = await response.Content.ReadAsStreamAsync())
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     #region Windows only
                     var imagen = Image.FromStream(stream);
@@ -256,7 +257,7 @@ namespace RetosMoureDev
                     //Por ejemplo, si el MCD de 1920 y 1080 es 120, el aspect ratio de la imagen es 16:9
                     int mcd = MCD(ancho, alto);
 
-                    return $"{ancho/mcd}:{alto/mcd}";
+                    return $"{ancho / mcd}:{alto / mcd}";
                     #endregion
 
                     #region Linux/macOS
@@ -312,7 +313,7 @@ namespace RetosMoureDev
             char[] palabraInvertida = new char[palabraAInvertir.Length];
 
             //Recorremos la palabra original de atras hacia adelante y la guardamos en la palabra invertida
-            for(int i = 0;  i < palabraInvertida.Length; i++)
+            for (int i = 0; i < palabraInvertida.Length; i++)
             {
                 palabraInvertida[i] = palabraAInvertir[palabraAInvertir.Length - (i + 1)];
             }
@@ -337,26 +338,26 @@ namespace RetosMoureDev
         public static void N8(string oracion)
         {
             Console.WriteLine($"La oracion introducida es \"{oracion}\"");
-            
+
             string oracionNormalizada = NormalizarOracion(oracion);
             Console.WriteLine($"Su version normalizada es \"{oracionNormalizada}\"");
-            
+
             Console.WriteLine($"Y el recuento de sus palabras por ocurrencia es:");
-            foreach(var palabraConOcurrencia in ObtenerPalabrasConOcurrencias(oracionNormalizada))
+            foreach (var palabraConOcurrencia in ObtenerPalabrasConOcurrencias(oracionNormalizada))
             {
                 Console.WriteLine($"{palabraConOcurrencia.Key}: {palabraConOcurrencia.Value} veces");
             }
         }
 
         //Normaliza la oracion quitando signos de puntuacion, espacios al principio/final y poniendo todo en minusculas
-        private static string NormalizarOracion(string oracion) 
+        private static string NormalizarOracion(string oracion)
         {
             string oracionNormalizada = string.Empty;
             string oracionEnMinusculasConTrim = oracion.ToLower().Trim();
 
             foreach (char caracter in oracionEnMinusculasConTrim)
             {
-                if(char.IsLetterOrDigit(caracter) || char.IsWhiteSpace(caracter))
+                if (char.IsLetterOrDigit(caracter) || char.IsWhiteSpace(caracter))
                 {
                     oracionNormalizada += caracter;
                 }
@@ -376,9 +377,9 @@ namespace RetosMoureDev
             Dictionary<string, int> palabrasConOcurrencias = new Dictionary<string, int>();
 
             //Recorremos cada palabra de la oracion y contamos cuantas veces aparece
-            foreach(string palabra in palabasDeOracion)
+            foreach (string palabra in palabasDeOracion)
             {
-                if(palabrasConOcurrencias.ContainsKey(palabra))
+                if (palabrasConOcurrencias.ContainsKey(palabra))
                 {
                     palabrasConOcurrencias[palabra] += 1;
                 }
@@ -439,7 +440,7 @@ namespace RetosMoureDev
             //Y el string seria "001"
             //Al invertirlo, obtenemos el numero binario correcto "100"
             string binario = string.Empty;
-            while(numero > 0)
+            while (numero > 0)
             {
                 uint resto = numero % 2;
                 binario = resto + binario;
@@ -467,7 +468,7 @@ namespace RetosMoureDev
         /// </remarks>
         public static void N10(string mensaje)
         {
-            if(EsMorse(mensaje))
+            if (EsMorse(mensaje))
             {
                 Console.WriteLine($"Tu mensaje \"{mensaje}\" esta en morse.");
                 Console.WriteLine($"Decodificado, el mensaje contiene:");
@@ -483,9 +484,9 @@ namespace RetosMoureDev
 
         private static bool EsMorse(string mensaje)
         {
-            foreach(char letra in mensaje)
+            foreach (char letra in mensaje)
             {
-                if (char.IsLetterOrDigit(letra)) 
+                if (char.IsLetterOrDigit(letra))
                 {
                     return false;
                 }
@@ -523,7 +524,7 @@ namespace RetosMoureDev
                 //Por ejemplo, si el mensaje es "HELLO WORLD"
                 //El mensaje codificado seria ".... . .-.. .-.. ---  .-- --- .-. .-.. -.."
                 //Donde cada letra esta separada por un espacio y cada palabra por dos
-                if(diccionarioNaturalMorse.ContainsKey(letra))
+                if (diccionarioNaturalMorse.ContainsKey(letra))
                 {
                     mensajeCodificado.Append(diccionarioNaturalMorse[letra]);
                 }
@@ -566,9 +567,9 @@ namespace RetosMoureDev
             //Luego separamos las letras y obtenemos "....", ".", ".-..", ".-..", "---" y ".--", "---", ".-.", ".-..", "-.."
             //Y finalmente descodificamos cada letra y juntamos las palabras
             //Por lo que el mensaje descodificado seria "HELLO WORLD"
-            foreach(string palabra in mensaje.ToUpper().Split("  "))
+            foreach (string palabra in mensaje.ToUpper().Split("  "))
             {
-                foreach(string simbolos in palabra.Split(" "))
+                foreach (string simbolos in palabra.Split(" "))
                 {
                     if (diccionarioMorseNatural.ContainsKey(simbolos))
                     {
@@ -605,7 +606,7 @@ namespace RetosMoureDev
         /// </remarks>
         public static void N11(string expresion)
         {
-            if(EsExpresionBalanceada(expresion))
+            if (EsExpresionBalanceada(expresion))
             {
                 Console.WriteLine($"La expresion \'{expresion}' esta balanceada");
             }
@@ -630,17 +631,17 @@ namespace RetosMoureDev
             //Si no, no lo esta
             Stack<char> delimitadoresAbiertos = new Stack<char>();
 
-            foreach(char caracter in expresion)
+            foreach (char caracter in expresion)
             {
                 //Si el caracter es un delimitador que se abre, lo metemos en el stack
-                if(simbolos.ContainsKey(caracter))
+                if (simbolos.ContainsKey(caracter))
                 {
                     delimitadoresAbiertos.Push(caracter);
                 }//Si el caracter es un delimitador que se cierra, comprobamos que el ultimo delimitador que se abrio sea el que se cierra
-                else if(simbolos.ContainsValue(caracter))
+                else if (simbolos.ContainsValue(caracter))
                 {
                     //Si no hay delimitadores abiertos o el ultimo delimitador abierto no es el que se cierra, la expresion no esta balanceada
-                    if(delimitadoresAbiertos.Count == 0 || caracter != simbolos[delimitadoresAbiertos.Pop()])
+                    if (delimitadoresAbiertos.Count == 0 || caracter != simbolos[delimitadoresAbiertos.Pop()])
                     {
                         return false;
                     }
@@ -649,6 +650,153 @@ namespace RetosMoureDev
 
             //Si al final del recorrido del string, el stack esta vacio, la expresion esta balanceada
             return delimitadoresAbiertos.Count == 0;
+        }
+        #endregion
+
+        #region Ejercicio 12
+        /// <summary>
+        /// Crea una función que reciba dos cadenas como parámetro (str1, str2)
+        /// e imprima otras dos cadenas como salida (out1, out2).
+        /// - out1 contendrá todos los caracteres presentes en la str1 pero NO
+        ///   estén presentes en str2.
+        /// - out2 contendrá todos los caracteres presentes en la str2 pero NO
+        ///   estén presentes en str1.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Fácil
+        /// </remarks>
+        /// 
+        public static void N12(string str1, string str2)
+        {
+            string out1 = string.Empty;
+            string out2 = string.Empty;
+
+            ObtenerCaracteresDiferentes(str1, str2, out out1, out out2);
+
+            Console.WriteLine($"str1: \"{str1}\" / out1: \"{out1}\"");
+            Console.WriteLine($"str2: \"{str2}\" / out2: \"{out2}\"");
+        }
+        private static void ObtenerCaracteresDiferentes(string str1, string str2, out string out1, out string out2)
+        {
+            out1 = string.Empty;
+            out2 = string.Empty;
+
+            foreach (char caracter in str1)
+            {
+                if (!str2.Contains(caracter))
+                {
+                    out1 += caracter;
+                }
+            }
+
+            foreach (char caracter in str2)
+            {
+                if (!str1.Contains(caracter))
+                {
+                    out2 += caracter;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Ejercicio 13
+        /// <summary>
+        /// Escribe una función que reciba un texto y retorne verdadero o
+        /// falso (Boolean) según sean o no palíndromos.
+        /// Un Palíndromo es una palabra o expresión que es igual si se lee
+        /// de izquierda a derecha que de derecha a izquierda.
+        /// NO se tienen en cuenta los espacios, signos de puntuación y tildes.
+        /// Ejemplo: Ana lleva al oso la avellana.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Medio
+        /// </remarks>
+        public static void N13(string texto)
+        {
+            Console.WriteLine($"El texto \"{texto}\" {(EsPalindromo(texto) ? "es" : "no es")} palíndromo");
+        }
+
+        private static bool EsPalindromo(string texto)
+        {
+            string textoNormalizado = texto.Trim() // Eliminamos espacios iniciales/finales
+                .ToLowerInvariant() // Convertimos todo a minusculas
+                .Normalize(NormalizationForm.FormD) // Cescomponemos acentos y caracteres especiales
+                .Replace(" ", ""); // Eliminamos espacios en blancos intermedios
+
+            textoNormalizado = Regex.Replace(textoNormalizado, @"\p{P}", ""); // Eliminamos signos de puntuacion con un regex
+            textoNormalizado = Regex.Replace(textoNormalizado, @"\p{M}", ""); // Elimina marcas diacríticas (acentos, etc.)
+
+            string textoInvertido = string.Empty;
+
+            for (int i = textoNormalizado.Length - 1; i >= 0; i--)
+            {
+                textoInvertido += textoNormalizado[i];
+            }
+
+            return textoNormalizado == textoInvertido;
+        }
+        #endregion
+
+        #region Ejercicio 14
+        /// <summary>
+        /// Escribe una función que calcule y retorne el factorial de un número dado
+        /// de forma recursiva.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Fácil
+        /// </remarks>
+        public static void N14(int num)
+        {
+            Console.WriteLine($"El factorial de {num} es {CalculaFactorial(num)}");
+        }
+
+        private static int CalculaFactorial(int N)
+        {
+            //Caso base
+            if (N == 1)
+                return N;
+            else
+                return N * CalculaFactorial(N - 1);
+        }
+
+        #endregion
+
+        #region Ejercicio 15
+        /// <summary>
+        /// Escribe una función que calcule si un número dado es un número de Armstrong
+        /// (o también llamado narcisista).
+        /// Si no conoces qué es un número de Armstrong, debes buscar información
+        /// al respecto.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Fácil <br/>
+        /// <a href="https://es.wikipedia.org/wiki/N%C3%BAmero_narcisista">Explicacion de que es un numero narcisista</a>
+        /// </remarks>
+        public static void N15(int num)
+        {
+            Console.WriteLine($"El num \"{num}\" {(EsNarcisista(num) ? "es" : "no es")} un numero de Armstrong (o numero narcisista)");
+        }
+
+        //
+        private static bool EsNarcisista(int num)
+        {
+            int numCifras = num.ToString().Length;
+            int temp = num;
+            double calculo = 0;
+
+            while (temp > 0)
+            {
+                int cifraActual = temp % 10;
+                calculo += Math.Pow(cifraActual, numCifras);
+                temp /= 10;
+            }
+
+            return Convert.ToInt32(calculo) == num;
         }
         #endregion
     }
