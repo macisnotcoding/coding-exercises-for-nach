@@ -1,4 +1,5 @@
 ﻿using RetosMoureDev;
+using RetosMoureDev.Models;
 using RetosMoureDev.Models.Poligonos;
 
 #region Ejercicio 1
@@ -68,7 +69,33 @@ using RetosMoureDev.Models.Poligonos;
 #endregion
 
 #region Ejercicio 15
-Ejercicios.N15(153);
-Ejercicios.N15(370);
-Ejercicios.N15(369);
+//Ejercicios.N15(153);
+//Ejercicios.N15(370);
+//Ejercicios.N15(369);
+#endregion
+
+#region Ejercicio 16
+//Ejercicios.N16("18/05/2022", "29/05/2022");
+//Ejercicios.N16("macisnotcoding", "29/04/2022");
+//Ejercicios.N16("18/5/2022", "29/04/2022");
+//Ejercicios.N16("29/05/2022", "04/01/2022");
+#endregion
+
+#region Ejercicio 17
+//Ejercicios.N17("en la granja de pepito");
+//Ejercicios.N17("¿hola qué tal estás?");
+//Ejercicios.N17("¿hola      qué tal estás?");
+//Ejercicios.N17("El niño ñoño");
+#endregion
+
+#region Ejercicio 18
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run], "_|_|_");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.run, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run], "_|_|_");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.run], "_|_|_");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.run], "_|_|_|_");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run, AccionAtleta.jump], "_|_|_");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run], "_|_|_");
+Ejercicios.N18([AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump], "|||||");
+Ejercicios.N18([AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump, AccionAtleta.jump], "||?||");
+Ejercicios.N18([AccionAtleta.run, AccionAtleta.jump, AccionAtleta.run, AccionAtleta.jump, "aaa"], "_|_|_");
 #endregion

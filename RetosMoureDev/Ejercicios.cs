@@ -1,5 +1,6 @@
 ﻿using RetosMoureDev.Models.Poligonos;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -798,6 +799,133 @@ namespace RetosMoureDev
 
             return Convert.ToInt32(calculo) == num;
         }
+        #endregion
+
+        #region Ejercicio 16
+        /// <summary>
+        /// Crea una función que calcule y retorne cuántos días hay entre dos cadenas
+        /// de texto que representen fechas.
+        /// - Una cadena de texto que representa una fecha tiene el formato "dd/MM/yyyy".
+        /// - La función recibirá dos String y retornará un Int.
+        /// - La diferencia en días será absoluta (no importa el orden de las fechas).
+        /// - Si una de las dos cadenas de texto no representa una fecha correcta se
+        ///   lanzará una excepción.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Difícil
+        /// </remarks>
+        public static void N16(string str1, string str2)
+        {
+            try
+            {
+                DateTime fechaStr1 = DateTime.ParseExact(str1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime fechaStr2 = DateTime.ParseExact(str2, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                Console.WriteLine($"la diferencia de dias entre la fecha {str1} y {str2} es de {Math.Abs((fechaStr1 - fechaStr2).Days)} dias");
+            } 
+            catch(FormatException)
+            {
+                Console.WriteLine("Error: Formato de fecha incorrecto en alguna de las dos fechas proporcionadas");
+            }
+        }
+        #endregion
+
+        #region Ejercicio 17
+        /// <summary>
+        /// Crea una función que reciba un String de cualquier tipo y se encargue de
+        /// poner en mayúscula la primera letra de cada palabra.
+        /// - No se pueden utilizar operaciones del lenguaje que
+        ///   lo resuelvan directamente.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Fácil
+        /// </remarks>
+        public static void N17(string str)
+        {
+            Console.WriteLine($"La frase introducida: \"{str}\"");
+
+            //Usamos un simple Regex para poner a mayuscula la primera letra, incluyendo aquellas palabras que empiezan por signo de puntuacion como "¿hola"
+            string output = Regex.Replace(str, @"\b\w", m => m.Value.ToUpper());
+
+            Console.WriteLine($"la misma frase con todas sus palabras en mayuscula inicial: \"{output.Trim()}\"");
+        }
+        #endregion
+
+        #region Ejercicio 18
+        /// <summary>
+        /// Crea una función que evalúe si un/a atleta ha superado correctamente una
+        /// carrera de obstáculos.
+        /// - La función recibirá dos parámetros:
+        ///      - Un array que sólo puede contener String con las palabras
+        ///        "run" o "jump"
+        ///      - Un String que represente la pista y sólo puede contener "_" (suelo)
+        ///        o "|" (valla)
+        /// - La función imprimirá cómo ha finalizado la carrera:
+        ///      - Si el/a atleta hace "run" en "_" (suelo) y "jump" en "|" (valla)
+        ///        será correcto y no variará el símbolo de esa parte de la pista.
+        ///      - Si hace "jump" en "_" (suelo), se variará la pista por "x".
+        ///      - Si hace "run" en "|" (valla), se variará la pista por "/".
+        /// - La función retornará un Boolean que indique si ha superado la carrera.
+        /// Para ello tiene que realizar la opción correcta en cada tramo de la pista.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Medio
+        /// </remarks>
+        public static void N18(string[] acciones, string pista)
+        {
+            if (!SonAccionesValida(acciones))
+            {
+                Console.WriteLine("Error: las acciones recibidas contiene más instrucciones aparte de las válidas \"run\" y \"jump\"");
+            }
+            else if (!EsPistaValida(pista))
+            {
+                Console.WriteLine($"Error: la pista {pista} no es valida");
+            }
+            else
+            {
+                string pistaResultante = string.Empty;
+                int maxIndice = Math.Max(acciones.Length, pista.Length); //Obtenemos el indice mas grande de entre el numero de acciones y el numero de obstaculos en la pista
+                for (int i = 0; i < maxIndice; i++)
+                {
+                    //Si se da el caso de que el atleta deja de hacer acciones cuando todavia queda pista
+                    //o si el atleta se queda sin pista para seguir haciendo sus acciones
+                    //vamos rellenando cada paso en la pista resultante con un '?'
+                    if (i >= acciones.Length || i >= pista.Length)
+                    {
+                        pistaResultante += '?';
+                        continue;
+                    }
+
+                    if (acciones[i] == "run")
+                    {
+                        pistaResultante += pista[i] == '_' ? pista[i] : '/';
+                    }
+                    else
+                    {
+                        pistaResultante += pista[i] == '|' ? pista[i] : 'x';
+                    }
+                }
+
+                Console.WriteLine($"La pista \"{pista}\" ha quedado asi tras el paso del atleta: \"{pistaResultante}\"");
+                bool haSuperadoLaCarrera = pista == pistaResultante;
+                Console.WriteLine($"El atleta {(haSuperadoLaCarrera ? "SI" : "NO")} ha superado la carrera");
+            }
+        }
+
+        private static bool SonAccionesValida(string[] acciones)
+        {
+            return acciones.All(accion => accion == "run" || accion == "jump");
+        }
+
+        private static bool EsPistaValida(string pista)
+        {
+            return Regex.IsMatch(pista, "^[_|]*$");
+        }
+
+
         #endregion
     }
 }
