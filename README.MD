@@ -13,11 +13,15 @@ This repository serves as a dynamic resource where I'll be documenting solutions
 - **Problem Descriptions**: Each solved problem will include a detailed description to offer context and understanding of the challenge at hand.
 - **Solutions in C#**: Solutions will be provided with C# code snippets, accompanied by an explanation of the logic and approach taken.
 - **Focus on Console Applications**: Given our current focus, the solutions will predominantly revolve around console applications, showcasing the practical use of C# in solving real-world problems.
+- **Interactive Menu to Test Solutions**: An interactive menu has been implemented to easily test and demonstrate the solutions for each programming challenge.
+- **Template for Implementing New Exercises**: A standardized template is available to facilitate the addition of new exercises, ensuring consistency and ease of integration.
 - **Learning Resources and References**: Where applicable, links to useful resources, documentation, and guides will be shared to enhance the learning experience.
 
 ## How to Use This Repository
 
 - **Browsing and Learning**: Feel free to explore the solutions, understand the logic behind them, and apply the learning to similar problems you encounter.
+- **Testing Solutions**: Utilize the interactive menu to execute and test solutions, providing a hands-on experience with the code.
+- **Implementing New Exercises**: Use the [provided template](https://github.com/macisnotcoding/coding-exercises-for-nach/blob/master/RetosMoureDev/Resources/Templates/EjercicioTemplate.cs) with the appropiate naming (` Ejercicio0xxx`) when adding new exercises to maintain the structure and quality of the repository.
 - **Search Functionality**: Use the search feature to find solutions to specific challenges or topics of interest.
 - **Feedback and Contributions**: We welcome feedback on the solutions provided and encourage contributions from anyone willing to share their approach to solving programming challenges.
 
@@ -27,7 +31,7 @@ This project is born from a friendship and a shared passion for programming. If 
 
 ## License
 
-This repository is shared for educational purposes. Feel free to use, modify, and distribute the content within it, but please do so responsibly and ethically.
+This repository is shared for educational purposes. Feel free to use, modify, and distribute the content within it, but please do so responsibly and ethically. And maybe [some kudos for me](https://github.com/macisnotcoding) =^.^=
 
 ## Acknowledgements
 
