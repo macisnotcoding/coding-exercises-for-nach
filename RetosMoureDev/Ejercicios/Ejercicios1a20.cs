@@ -1,12 +1,13 @@
-﻿using RetosMoureDev.Models.Poligonos;
+﻿using RetosMoureDev.Models;
+using RetosMoureDev.Models.Poligonos;
 using System.Drawing;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace RetosMoureDev
+namespace RetosMoureDev.Ejercicios
 {
-    public static class Ejercicios
+    public static class Ejercicios1a20
     {
         #region Ejercicio 1
         /// <summary>
@@ -258,6 +259,7 @@ namespace RetosMoureDev
                     //Por ejemplo, si el MCD de 1920 y 1080 es 120, el aspect ratio de la imagen es 16:9
                     int mcd = MCD(ancho, alto);
 
+
                     return $"{ancho / mcd}:{alto / mcd}";
                     #endregion
 
@@ -279,8 +281,13 @@ namespace RetosMoureDev
             }
         }
 
-        //Calcula el maximo comun divisor de dos numeros
-        private static int MCD(int a, int b)
+        /// <summary>
+        /// Calcula el MCD de dos enteros utilizando el metodo del algoritmo de Euclides
+        /// 
+        /// <remarks>
+        /// <a href="https://es.wikipedia.org/wiki/Algoritmo_de_Euclides">Explicacion del algoritmo de Euclides</a>
+        /// </remarks>
+        internal static int MCD(int a, int b)
         {
             while (b != 0)
             {
@@ -823,8 +830,8 @@ namespace RetosMoureDev
                 DateTime fechaStr2 = DateTime.ParseExact(str2, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
                 Console.WriteLine($"la diferencia de dias entre la fecha {str1} y {str2} es de {Math.Abs((fechaStr1 - fechaStr2).Days)} dias");
-            } 
-            catch(FormatException)
+            }
+            catch (FormatException)
             {
                 Console.WriteLine("Error: Formato de fecha incorrecto en alguna de las dos fechas proporcionadas");
             }
@@ -888,17 +895,21 @@ namespace RetosMoureDev
             {
                 string pistaResultante = string.Empty;
                 int maxIndice = Math.Max(acciones.Length, pista.Length); //Obtenemos el indice mas grande de entre el numero de acciones y el numero de obstaculos en la pista
+
+                //Recorremos cada paso en la pista y en las acciones del atleta
                 for (int i = 0; i < maxIndice; i++)
                 {
-                    //Si se da el caso de que el atleta deja de hacer acciones cuando todavia queda pista
-                    //o si el atleta se queda sin pista para seguir haciendo sus acciones
-                    //vamos rellenando cada paso en la pista resultante con un '?'
+                    //Si el indice es mayor o igual al numero de acciones o al numero de obstaculos en la pista
+                    //añadimos un '?' a la pista resultante
                     if (i >= acciones.Length || i >= pista.Length)
                     {
                         pistaResultante += '?';
                         continue;
                     }
 
+                    //Si el atleta corre en el suelo y salta la valla, no cambiamos la pista
+                    //Si el atleta salta en el suelo, cambiamos la pista por 'x'
+                    //Si el atleta corre en la valla, cambiamos la pista por '/'
                     if (acciones[i] == "run")
                     {
                         pistaResultante += pista[i] == '_' ? pista[i] : '/';
@@ -926,6 +937,164 @@ namespace RetosMoureDev
         }
 
 
+        #endregion
+
+        #region Ejercicio 19
+        /// <summary>
+        /// Crea una función que analice una matriz 3x3 compuesta por "X" y "O"
+        /// y retorne lo siguiente:
+        /// - "X" si han ganado las "X"
+        /// - "O" si han ganado los "O"
+        /// - "Empate" si ha habido un empate
+        /// - "Nulo" si la proporción de "X", de "O", o de la matriz no es correcta.
+        ///   O si han ganado los 2.
+        /// Nota: La matriz puede no estar totalmente cubierta.
+        /// Se podría representar con un vacío "", por ejemplo.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Difícil
+        /// </remarks>
+        public static void N19(TresEnRayaValor[,] tablero)
+        {
+            TresEnRayaResultado resultado = tablero.EsTableroNulo() ? TresEnRayaResultado.NULO : tablero.ComprobarVictoriaOEmpate();
+
+            tablero.Imprimir();
+
+            Console.WriteLine($"El resultado de esta partida es {resultado}");
+            Console.WriteLine("============================================");
+        }
+
+        private static bool EsTableroNulo(this TresEnRayaValor[,] tablero)
+        {
+            // Si el tablero no tiene 9 (3x3) elementos, es nulo
+            if (tablero.Length != 9)
+            {
+                return true;
+            }
+
+            int numX = 0;
+            int numO = 0;
+
+            // Contamos cuantas X y O hay en el tablero
+            foreach (var pieza in tablero)
+            {
+                if (pieza == TresEnRayaValor.X)
+                {
+                    numX++;
+                }
+                else if (pieza == TresEnRayaValor.O)
+                {
+                    numO++;
+                }
+            }
+
+            // Si la diferencia entre el numero de X y O es mayor a 1, el tablero es nulo
+            if (Math.Abs(numX - numO) > 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static TresEnRayaResultado ComprobarVictoriaOEmpate(this TresEnRayaValor[,] tablero)
+        {
+            // Definimos las combinaciones ganadoras como una matriz de enteros.
+            (int, int)[][] combinacionesGanadoras =
+            [
+                [(0, 0), (0, 1), (0, 2)],
+                [(1, 0), (1, 1), (1, 2)],
+                [(2, 0), (2, 1), (2, 2)],
+                [(0, 0), (1, 0), (2, 0)],
+                [(0, 1), (1, 1), (2, 1)],
+                [(0, 2), (1, 2), (2, 2)],
+                [(0, 0), (1, 1), (2, 2)],
+                [(0, 2), (1, 1), (2, 0)]
+            ];
+
+            //Planteamos inicialmente un empate
+            TresEnRayaResultado resultado = TresEnRayaResultado.EMPATE;
+
+            //Revisamos cada combinacion ganadora
+            foreach (var combinacionGanadora in combinacionesGanadoras)
+            {
+                // Verificamos si los valores en las posiciones ganadoras son iguales y no vacíos.
+                if (tablero[combinacionGanadora[0].Item1, combinacionGanadora[0].Item2] != TresEnRayaValor.VACIO &&
+                    tablero[combinacionGanadora[0].Item1, combinacionGanadora[0].Item2] == tablero[combinacionGanadora[1].Item1, combinacionGanadora[1].Item2] &&
+                    tablero[combinacionGanadora[0].Item1, combinacionGanadora[0].Item2] == tablero[combinacionGanadora[2].Item1, combinacionGanadora[2].Item2])
+                {
+                    var ganador = tablero[combinacionGanadora[0].Item1, combinacionGanadora[0].Item2];
+
+                    // Verificamos si ya se ha encontrado un ganador diferente anteriormente.
+                    if (resultado != TresEnRayaResultado.EMPATE &&
+                        (resultado == TresEnRayaResultado.O ? TresEnRayaValor.O : TresEnRayaValor.X) != ganador)
+                    {
+                        return TresEnRayaResultado.NULO;
+                    }
+
+                    // Asignamos el resultado basado en el ganador de la combinación actual.
+                    resultado = ganador == TresEnRayaValor.X ? TresEnRayaResultado.X : TresEnRayaResultado.O;
+                }
+            }
+
+            return resultado;
+        }
+
+        private static void Imprimir(this TresEnRayaValor[,] tablero)
+        {
+            int filas = tablero.GetLength(0);
+            int columnas = tablero.GetLength(1);
+            string lineaHorizontal = new string('-', columnas * 4 + 1);
+
+            Console.WriteLine();
+            Console.WriteLine("Tablero de Tres en Raya:");
+            for (int i = 0; i < filas; i++)
+            {
+                Console.WriteLine(lineaHorizontal);
+                for (int j = 0; j < columnas; j++)
+                {
+                    // Imprimir el borde izquierdo del recuadro y el valor de la ficha
+                    Console.Write($"| {(char)tablero[i, j]} ");
+                }
+                Console.WriteLine("|"); // Cerrar la línea con un borde derecho
+            }
+            Console.WriteLine(lineaHorizontal);
+        }
+
+        #endregion
+
+        #region Ejercicio 20
+        /// <summary>
+        /// Crea una función que reciba días, horas, minutos y segundos (como enteros)
+        /// y retorne su resultado en milisegundos.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Dificultad: Fácil
+        /// </remarks>
+        public static void N20(int dias, int horas, int minutos, int segundos)
+        {
+            var milisegundos = TiempoEnMilisegundos(dias, horas, minutos, segundos);
+
+            Console.WriteLine("{0} dias, {1} horas, {2} minutos y {3} segundos hacen un total de {4} milisegundos",
+                dias,
+                horas,
+                minutos,
+                segundos,
+                milisegundos
+            );
+        }
+
+        private static long TiempoEnMilisegundos(int dias, int horas, int minutos, int segundos)
+        {
+            long segundosEnMillis = segundos * 1000;
+            long minutosEnMillis = minutos * 60 * 1000;
+            long horasEnMillis = horas * 60 * 60 * 1000;
+            long diasEnMillis = dias * 24 * 60 * 60 * 1000;
+
+            return diasEnMillis + horasEnMillis + minutosEnMillis + segundosEnMillis;
+        }
         #endregion
     }
 }
