@@ -9,7 +9,7 @@ namespace RetosMoureDev.Ejercicios
 {
     public static class Ejercicios1a20
     {
-        #region Ejercicio 1
+        #region Ejercicio 1 - Fizz Buzz
         /// <summary>
         /// Escribe un programa que muestre por consola(con un print) los
         /// números de 1 a 100 (ambos incluidos y con un salto de línea entre
@@ -48,7 +48,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 2
+        #region Ejercicio 2 - ¿Es un anagrama?
         /// <summary>
         /// Escribe una función que reciba dos palabras (String) y retorne
         /// verdadero o falso (Bool) según sean o no anagramas.
@@ -104,7 +104,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 3
+        #region Ejercicio 3 - La sucesion de Fibonacci
 
         /// <summary>
         /// Escribe un programa que imprima los 50 primeros números de la sucesión
@@ -115,7 +115,9 @@ namespace RetosMoureDev.Ejercicios
         /// </summary>
         /// 
         /// <remarks>
-        /// Dificultad: Dificil
+        /// Dificultad: Dificil <br/>
+        /// Hay muchas versiones para implementar este algoritmo. Te recomiendo echar un ojo a internetes,
+        /// por ejemplo <a href="https://thescienceofcode.azurewebsites.net/Articles/Show/561d6c4d0e6ed3599439f1ce">esta pagina</a>
         /// </remarks>
         public static void N3()
         {
@@ -143,7 +145,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 4
+        #region Ejercicio 4 - ¿Es un numero primo?
 
         /// <summary>
         /// Escribe un programa que se encargue de comprobar si un número es o no primo.
@@ -190,7 +192,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 5
+        #region Ejercicio 5 - Area de un poligono
 
         /// <summary>
         /// Crea una única función (importante que sólo sea una) que sea capaz
@@ -210,7 +212,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 6
+        #region Ejercicio 6 - Aspect ratio de una imagen
         /// <summary>
         /// Crea un programa que se encargue de calcular el aspect ratio de una
         /// imagen a partir de una url.
@@ -300,7 +302,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 7
+        #region Ejercicio 7 - Invirtiendo cadenas
         /// <summary>
         /// Crea un programa que invierta el orden de una cadena de texto
         /// sin usar funciones propias del lenguaje que lo hagan de forma automática.
@@ -330,7 +332,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 8
+        #region Ejercicio 8 - Contando palabras
         /// <summary>
         /// Crea un programa que cuente cuántas veces se repite cada palabra
         /// y que muestre el recuento final de todas ellas.
@@ -418,7 +420,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 9
+        #region Ejercicio 9 - Transformar numero decimal a binario
         /// <summary>
         /// Crea un programa que se encargue de transformar un número
         /// decimal natural(decimal como numero en base 10, no un decimal de c#) a binario sin utilizar funciones propias del lenguaje que lo hagan directamente.
@@ -459,7 +461,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 10
+        #region Ejercicio 10 - Codigo Morse
         /// <summary>
         /// Crea un programa que sea capaz de transformar texto natural a código
         /// morse y viceversa.
@@ -597,7 +599,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 11
+        #region Ejercicio 11 - Expresiones equilibradas
         /// <summary>
         /// Crea un programa que comprueba si los paréntesis, llaves y corchetes
         /// de una expresión están equilibrados.
@@ -661,7 +663,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 12
+        #region Ejercicio 12 - Mezclando letras en cadenas
         /// <summary>
         /// Crea una función que reciba dos cadenas como parámetro (str1, str2)
         /// e imprima otras dos cadenas como salida (out1, out2).
@@ -709,7 +711,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 13
+        #region Ejercicio 13 - ¿Es un palindromo?
         /// <summary>
         /// Escribe una función que reciba un texto y retorne verdadero o
         /// falso (Boolean) según sean o no palíndromos.
@@ -748,7 +750,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 14
+        #region Ejercicio 14 - Factorial recursivo
         /// <summary>
         /// Escribe una función que calcule y retorne el factorial de un número dado
         /// de forma recursiva.
@@ -773,7 +775,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 15
+        #region Ejercicio 15 - ¿Es un numero de Armstrong?
         /// <summary>
         /// Escribe una función que calcule si un número dado es un número de Armstrong
         /// (o también llamado narcisista).
@@ -808,7 +810,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 16
+        #region Ejercicio 16 - ¿Cuantos dias?
         /// <summary>
         /// Crea una función que calcule y retorne cuántos días hay entre dos cadenas
         /// de texto que representen fechas.
@@ -838,7 +840,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 17
+        #region Ejercicio 17 - En mayuscula
         /// <summary>
         /// Crea una función que reciba un String de cualquier tipo y se encargue de
         /// poner en mayúscula la primera letra de cada palabra.
@@ -860,7 +862,7 @@ namespace RetosMoureDev.Ejercicios
         }
         #endregion
 
-        #region Ejercicio 18
+        #region Ejercicio 18 - La carrera de obstaculos
         /// <summary>
         /// Crea una función que evalúe si un/a atleta ha superado correctamente una
         /// carrera de obstáculos.
@@ -937,9 +939,9 @@ namespace RetosMoureDev.Ejercicios
         }
 
 
-        #endregion
+        #endregion - 
 
-        #region Ejercicio 19
+        #region Ejercicio 19 - Tres en raya
         /// <summary>
         /// Crea una función que analice una matriz 3x3 compuesta por "X" y "O"
         /// y retorne lo siguiente:
@@ -1064,7 +1066,7 @@ namespace RetosMoureDev.Ejercicios
 
         #endregion
 
-        #region Ejercicio 20
+        #region Ejercicio 20 - Conversor de tiempo
         /// <summary>
         /// Crea una función que reciba días, horas, minutos y segundos (como enteros)
         /// y retorne su resultado en milisegundos.
