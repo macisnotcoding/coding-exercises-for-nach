@@ -21,7 +21,7 @@ This repository serves as a dynamic resource where I'll be documenting solutions
 
 - **Browsing and Learning**: Feel free to explore the solutions, understand the logic behind them, and apply the learning to similar problems you encounter.
 - **Testing Solutions**: Utilize the interactive menu to execute and test solutions, providing a hands-on experience with the code.
-- **Implementing New Exercises**: Use the [provided template](https://github.com/macisnotcoding/coding-exercises-for-nach/blob/master/RetosMoureDev/Resources/Templates/EjercicioTemplate.cs) with the appropiate naming (` Ejercicio0xxx`) when adding new exercises to maintain the structure and quality of the repository.
+- **Implementing New Exercises**: Use the [provided template](https://github.com/macisnotcoding/coding-exercises-for-nach/blob/master/RetosMoureDev/Ejercicios/Templates/EjercicioTemplate.cs) with the appropiate naming (`Ejercicio0xxx`) when adding new exercises to maintain the structure and quality of the repository.
 - **Search Functionality**: Use the search feature to find solutions to specific challenges or topics of interest.
 - **Feedback and Contributions**: We welcome feedback on the solutions provided and encourage contributions from anyone willing to share their approach to solving programming challenges.
 
