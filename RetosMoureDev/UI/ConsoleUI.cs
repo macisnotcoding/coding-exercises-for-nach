@@ -32,6 +32,12 @@
             Console.ResetColor();
         }
 
+        public static void ResetUI()
+        {
+            Console.ResetColor();
+            Console.Clear();
+        }
+
         public static string? ExerciseInput()
         {
             Console.Write("Introduce el número del ejercicio (1-101) o escribe 'exit' para salir: ");

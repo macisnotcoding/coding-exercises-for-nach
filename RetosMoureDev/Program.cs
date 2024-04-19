@@ -4,7 +4,7 @@ using System.Reflection;
 while (true)
 {
     Console.Title = "RetosMoureDev by macisnotcoding - https://github.com/macisnotcoding";
-    Console.Clear();
+    ConsoleUI.ResetUI();
 
     ConsoleUI.PrintWelcomeMessage();
     var input = ConsoleUI.ExerciseInput();
