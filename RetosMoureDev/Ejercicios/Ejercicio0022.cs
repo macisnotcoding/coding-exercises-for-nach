@@ -27,25 +27,34 @@
 
         private static void ExecuteLogic()
         {
-            string ruta = "./Resources/Ejercicio22.txt";
-            string[] lineas = File.ReadAllLines(ruta);
+            string ruta = "./Resources/Ejercicio00222.txt";
 
-            try
+            if (File.Exists(ruta))
             {
-                double? resultado = ProcesarCalculoTxt(lineas);
+                string[] lineas = File.ReadAllLines(ruta);
 
-                if (resultado.HasValue)
+                try
                 {
-                    Console.WriteLine($"El resultado del calculo detallado en \"Ejercicio22.txt\" es {resultado}");
+
+                    double? resultado = ProcesarCalculoTxt(lineas);
+
+                    if (resultado.HasValue)
+                    {
+                        Console.WriteLine($"El resultado del calculo detallado en \"Ejercicio0022.txt\" es {resultado}");
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("El formato del .txt no es correcto");
+                    }
                 }
-                else
+                catch (InvalidOperationException ex)
                 {
-                    throw new InvalidOperationException("El formato del .txt no es correcto");
+                    Console.Error.WriteLine($"El programa no se puede ejecutar. {ex.Message}");
                 }
             }
-            catch (InvalidOperationException ex)
+            else
             {
-                Console.Error.WriteLine($"El programa no se puede ejecutar. {ex.Message}");
+                Console.Error.WriteLine($"El .txt \"{ruta}\" no esta disponible");
             }
         }
 
