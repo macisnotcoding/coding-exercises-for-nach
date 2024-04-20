@@ -100,22 +100,24 @@ namespace RetosMoureDev.Ejercicios
             resultado.AppendLine("Resultados del Juego de Piedra, Papel o Tijeras:");
             foreach (var (jugador1, jugador2) in jugadas)
             {
-                resultado.AppendLine($"Juego {juego++}: {ConvertirASimbolo(jugador1)} vs {ConvertirASimbolo(jugador2)}");
+                resultado.AppendLine($"Juego {juego++}: {ConvertirAUnicode(jugador1)} vs {ConvertirAUnicode(jugador2)}");
             }
 
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(resultado.ToString());
+            Console.OutputEncoding = Encoding.Default;
         }
 
-        private static string ConvertirASimbolo(PiedraPapelTijeras jugada)
+        private static string ConvertirAUnicode(PiedraPapelTijeras jugada)
         {
             switch (jugada)
             {
                 case PiedraPapelTijeras.PIEDRA:
-                    return "(O)";
+                    return "\u270A";
                 case PiedraPapelTijeras.PAPEL:
-                    return "[_]";
+                    return "\u270B";
                 case PiedraPapelTijeras.TIJERAS:
-                    return "8<";
+                    return "\u270C";
                 default:
                     return "";
             }
